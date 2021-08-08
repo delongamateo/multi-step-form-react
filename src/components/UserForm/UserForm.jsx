@@ -1,5 +1,8 @@
 import { Component} from "react"
 import FormUserDetails from "../FormUserDetails/FormUserDetails"
+import FormPersonalDetails from "../FormPersonalDetails/FormPersonalDetails"
+import Confirm from "../Confirm/Confirm"
+import Success from "../Success/Success"
 
 export class UserForm extends Component {
     state = {
@@ -21,7 +24,7 @@ export class UserForm extends Component {
     }
 
     //Proceed to previous step
-    nextStep = () => {
+    prevStep = () => {
         const {step} = this.state;
         this.setState({
             step: step - 1
@@ -50,11 +53,26 @@ export class UserForm extends Component {
                     />
                 )
             case 2:
-                return (<h1>Personal</h1>)
+                return (
+                    <FormPersonalDetails
+                        nextStep={this.nextStep}
+                        handleChange={this.handleChange}
+                        value={values}
+                        prevStep={this.prevStep}
+                    />
+                )
             case 3:
-                return (<h1>Personal</h1>)
+                return (
+                    <Confirm
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        values={values}
+                    />
+                )
             case 4:
-                return (<h1>Personal</h1>)
+                return (
+                    <Success/>   
+                )
         }
     }
 }
